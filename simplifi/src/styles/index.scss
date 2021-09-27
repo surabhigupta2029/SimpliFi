@@ -1,0 +1,15 @@
+@import "./variables.scss";
+
+*{
+    box-sizing: border-box;
+    margin: 0px;
+}
+
+body {
+    width: 100%;
+    font-family: $Raleway;
+}
+
+#root{
+    height: 100%;
+}
