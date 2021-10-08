@@ -13,13 +13,13 @@ const Header = () => {
                      <a href="/">Home</a>
                  </li>
                  <li>
-                     <a href="/">About</a>
+                     <a href="/about">About</a>
                  </li>
                  <li>
-                     <a href="/">Log in</a>
+                     <a href="/login">Log in</a>
                  </li>
                  <li>
-                     <a href="/">Sign up</a>
+                     <a href="/signup">Sign up</a>
                  </li>
              </ul>
          </nav>
@@ -31,3 +31,4 @@ const Header = () => {
 }
 
 export default Header
+
