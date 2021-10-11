@@ -66,6 +66,7 @@ def exchange_public_token():
 
 @app.route('/accounts', methods=['GET'])
 def get_accounts():
+    print('hello')
     try:
         accounts_response = client.Accounts.get(access_token)
     except plaid.errors.PlaidError as e:
