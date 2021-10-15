@@ -1,0 +1,10 @@
+@import "./../styles/variables.scss";
+
+.footer{
+    background: linear-gradient(to bottom, $navColor, $navColor2);
+    position: relative;
+    width: 100%;
+    height: $headerHeight;
+    margin-top: 727px;
+
+}
