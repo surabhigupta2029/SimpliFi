@@ -79,9 +79,11 @@
 // Upon rendering of App component, make a request to create and
 // obtain a link token to be used in the Link component
 import React, { useEffect, useState } from 'react';
+// import { Route, withRouter, Switch } from 'react-router-dom';
 import { usePlaidLink } from 'react-plaid-link';
 const App = () => {
   const [linkToken, setLinkToken] = useState(null);
+  const [temp, setTemp] = useState("");
   const [currentTime, setCurrentTime] = useState(0)
 
   const generateToken = async () => {
@@ -89,9 +91,15 @@ const App = () => {
     const response = await fetch('/create_link_token');
     const data = await response.json();
     console.log('data', data)
+    setTemp("hey");
     setLinkToken(data.link_token);
   };
 
+  const generateAccessToken = async () => {
+    const response = await fetch('/exchange_public_token');
+    const data = await response.json();
+    console.log('data access', data)
+  };
 
   useEffect(() => {
     generateToken();
@@ -99,8 +107,18 @@ const App = () => {
       setCurrentTime(data.time);
     })
   }, []);
-  return linkToken != null ? <Link linkToken={linkToken} /> : <h1>error {currentTime}</h1>;
+
+
+  return (
+    <div>
+      {linkToken != null ? <Link linkToken={linkToken} /> : <h1>error {currentTime}</h1>}
+      <button onClick={() => generateAccessToken()}>click</button>
+    </div>
+  );
+
 };
+
+
 
 
 //   // useEffect(() => {
@@ -115,9 +133,9 @@ interface LinkProps {
   linkToken: string | null;
 }
 const Link: React.FC<LinkProps> = (props: LinkProps) => {
-  const onSuccess = React.useCallback((public_token, metadata) => {
+  const onSuccess = React.useCallback(async (public_token, metadata) => {
     // send public_token to server
-    const response = fetch('/set_access_token', {
+    const response = await fetch('/set_access_token', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -125,6 +143,7 @@ const Link: React.FC<LinkProps> = (props: LinkProps) => {
       body: JSON.stringify({ public_token }),
     });
     // Handle response ...
+    console.log(response);
   }, []);
   const config: Parameters<typeof usePlaidLink>[0] = {
     token: props.linkToken!,
@@ -132,9 +151,13 @@ const Link: React.FC<LinkProps> = (props: LinkProps) => {
   };
   const { open, ready } = usePlaidLink(config);
   return (
-    <button onClick={() => open()} disabled={!ready}>
-      Link account
-    </button>
+    <div>
+      <button onClick={() => open()} disabled={!ready}>
+        Link account
+      </button>
+
+
+    </div>
   );
 };
 export default App;
