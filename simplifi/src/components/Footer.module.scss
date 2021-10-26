@@ -2,9 +2,9 @@
 
 .footer{
     background: linear-gradient(to bottom, $navColor, $navColor2);
-    position: relative;
+    position: fixed;
+    bottom: 0;
     width: 100%;
     height: $headerHeight;
-    margin-top: 727px;
 
 }

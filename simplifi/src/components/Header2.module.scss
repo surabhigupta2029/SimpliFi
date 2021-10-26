@@ -1,6 +1,6 @@
 @import "./../styles/variables.scss";
 
-.header {
+.header2 {
     position: fixed;
     top: 0;
     background: linear-gradient(to top, $navColor, $navColor2);
@@ -29,8 +29,10 @@
             font-size: 2rem;
             font-weight: bold;
             color: $mainColor;
+            float: left;
             position: relative;
-            width: 76%;
+            width: 85%;
+            
         }
 
         &__nav {
