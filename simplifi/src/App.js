@@ -23,6 +23,7 @@ function App() {
       <Route path = "/mainmenu" component={MainMenu} />
       </Switch>
     <Footer />
+
     </div>
     </Router>
   );
