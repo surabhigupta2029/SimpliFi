@@ -2,7 +2,7 @@ import React from 'react';
 
 import classes from './Header.module.scss';
 
-const Header = () => {
+const Header = (props) => {
     return (
         <header className={classes.header}>  
          <div className={classes.header__content}>
@@ -25,6 +25,7 @@ const Header = () => {
          </nav>
          <div className={classes.header__content__toggle}>
             </div>
+            <div>{props.children}</div>
          </div>
         </header>
     )

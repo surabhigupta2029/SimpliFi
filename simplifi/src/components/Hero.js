@@ -1,10 +1,12 @@
 import React from 'react'
-
+import Header from './Header';
 import classes from './Hero.module.scss';
 
 function Hero() {
     return (
         <hero>
+            <Header>
+            </Header>
             <video src="/videos/video.mp4" autoPlay mute loop/>
         <div className={classes.hero__intro}>
             <h1>Welcome to Simplifi!</h1>
