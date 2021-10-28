@@ -4,15 +4,28 @@ import classes from './MainMenu.module.scss';
 
 function MainMenu() {
     return (
-        <about>
+        <mainmenu>
             <Header2>
             </Header2>
             <video src="/videos/video.mp4" autoPlay mute loop/>
         <div className={classes.MainMenu__intro}>
-            <h1>Main Menu</h1>
-            <p>Transactions, Balances, Loans, and Investments will go here</p>
+            <h1>Dashboard</h1>
+        <div className={classes.MainMenu__buttons}>
+            <a href="/transactions">  
+            <button>Transactions</button>  
+            </a>
+            <a href="/balances">  
+            <button>Balances</button> 
+            </a> 
+            <a href="/loans">  
+            <button>Loans</button>  
+            </a>
+            <a href="/investments">  
+            <button>Investments</button>  
+            </a>
+            </div>
         </div>
-        </about>
+        </mainmenu>
     )
 }
 

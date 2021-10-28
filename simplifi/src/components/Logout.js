@@ -4,7 +4,7 @@ import classes from './Logout.module.scss';
 
 function Logout() {
     return (
-        <login>
+        <logout>
             <Header2>
             </Header2>
             <video src="/videos/video.mp4" autoPlay mute loop/>
@@ -15,7 +15,7 @@ function Logout() {
             <button>Log out</button>  
             </a>
         </div>
-        </login>
+        </logout>
     )
 }
 
