@@ -10,7 +10,7 @@ const Header2 = (props) => {
          <nav className={classes.header2__content__nav}>
              <ul>
                  <li>
-                     <a href="/mainmenu">Main Menu</a>
+                     <a href="/mainmenu">Dashboard</a>
                  </li>
                  <li>
                      <a href="/logout">Log out</a>
