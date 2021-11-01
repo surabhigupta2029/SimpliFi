@@ -5,6 +5,7 @@ from plaid.model.link_token_create_request_user import LinkTokenCreateRequestUse
 import time
 from plaid.model.account_subtype import AccountSubtype
 from plaid.model.accounts_get_request import AccountsGetRequest
+from plaid.model.accounts_balance_get_request import AccountsBalanceGetRequest
 from plaid.model.country_code import CountryCode
 from plaid.model.depository_filter import DepositoryFilter
 from plaid.model.link_token_account_filters import LinkTokenAccountFilters
@@ -21,12 +22,17 @@ from plaid.model.transfer_user_in_request import TransferUserInRequest
 from plaid.model.transfer_network import TransferNetwork
 from plaid.model.transfer_create_request import TransferCreateRequest
 from plaid.model.transfer_create_idempotency_key import TransferCreateIdempotencyKey
-
+from plaid.model.transactions_get_request_options import TransactionsGetRequestOptions
+from plaid.model.transactions_get_request import TransactionsGetRequest
+from plaid.model.investments_holdings_get_request import InvestmentsHoldingsGetRequest
+from plaid.model.liabilities_get_request import LiabilitiesGetRequest
 from flask import Flask
 from flask import render_template
 from flask import request
 from flask import jsonify
 from dotenv import load_dotenv
+import datetime
+from datetime import timedelta
 import json
 import os
 load_dotenv()
@@ -66,6 +72,7 @@ def create_link_token():
         )
     )
     response = client.link_token_create(request)
+    print(response)
     # Send the data to the client
     return jsonify(response.to_dict())
 
@@ -76,17 +83,21 @@ access_token = None
 public_token = None
 
 
-@app.route('/api/set_access_token', methods=['POST'])
+@app.route('/set_access_token', methods=['POST'])
 def get_access_token():
+    print("entered set access")
     global access_token
     global item_id
     global transfer_id
-    public_token = request.form['public_token']
+    jsonData = (request.get_json())
+    publictoken = jsonData['public_token']
+    print(publictoken, " <------")
     try:
         exchange_request = ItemPublicTokenExchangeRequest(
-            public_token=public_token)
+            public_token=publictoken)
         exchange_response = client.item_public_token_exchange(exchange_request)
         access_token = exchange_response['access_token']
+        print('access token', access_token)
         item_id = exchange_response['item_id']
         if 'transfer' in PLAID_PRODUCTS:
             transfer_id = authorize_and_create_transfer(access_token)
@@ -124,7 +135,7 @@ def authorize_and_create_transfer(access_token):
             ),
         )
         response = client.transfer_authorization_create(request)
-        print(response)
+        print('res: "', response)
         authorization_id = response['authorization']['id']
 
         request = TransferCreateRequest(
@@ -173,6 +184,7 @@ def exchange_public_token():
 @app.route('/accounts', methods=['GET'])
 def get_accounts():
     try:
+        print('in accounts', access_token)
         request = AccountsGetRequest(access_token=access_token)
         accounts_response = client.accounts_get(request)
     except plaid.ApiException as e:
@@ -181,6 +193,77 @@ def get_accounts():
                                   response['error_message'], 'error_code': response['error_code'], 'error_type': response['error_type']}})
     return jsonify(accounts_response.to_dict())
 
+
+@app.route('/balance', methods=['GET'])
+def get_balance():
+    request = AccountsBalanceGetRequest(access_token=access_token)
+    response = client.accounts_balance_get(request)
+    print(response.to_dict())
+    return jsonify(response.to_dict())
+
+
+@app.route('/transactions', methods=['GET'])
+def get_transactions():
+    # Pull transactions for the last 30 days
+    start_date = (datetime.datetime.now() - timedelta(days=60))
+    end_date = datetime.datetime.now() - timedelta(days=30)
+    print(start_date.date(), "   ", end_date.date(), "   ", access_token)
+    time.sleep(5000)
+    try:
+        options = TransactionsGetRequestOptions()
+        request = TransactionsGetRequest(
+            access_token=access_token,
+            start_date=start_date.date(),
+            end_date=end_date.date(),
+            options=options
+        )
+        response = client.transactions_get(request)
+        print(response.to_dict())
+        return jsonify(response.to_dict())
+    except plaid.ApiException as e:
+        error_response = print(e)
+        return jsonify(error_response)
+
+
+@app.route('/investments', methods=['GET'])
+def get_investments():
+    # Pull Holdings for an Item
+    request = InvestmentsHoldingsGetRequest(access_token=access_token)
+    response = client.investments_holdings_get(request)
+    print(response.to_dict())
+    return jsonify(response.to_dict())
+
+
+@app.route('/loans', methods=['GET'])
+def get_loans():
+    request = LiabilitiesGetRequest(access_token=access_token)
+    response = client.liabilities_get(request)
+    print(response.to_dict())
+    return jsonify(response.to_dict())
+
+
+# request = TransactionsGetRequest(
+#     access_token=access_token,
+#     start_date=datetime.date('2020-01-01'),
+#     end_date=datetime.date('2021-02-01'),
+#     options=TransactionsGetRequestOptions()
+# )
+# response = client.transactions_get(request)
+# transactions = response['transactions']
+
+# # Manipulate the count and offset parameters to paginate
+# # transactions and retrieve all available data
+# while len(transactions) < response['total_transactions']:
+#     request = TransactionsGetRequest(
+#         access_token=access_token,
+#         start_date='2018-01-01',
+#         end_date='2018-02-01',
+#         options=TransactionsGetRequestOptions(
+#             offset=len(transactions)
+#         )
+#     )
+#     response = client.transactions_get(request)
+#     transactions.extend(response['transactions'])
 
 if __name__ == "__main__":
     app.run()
