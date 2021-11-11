@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import Header from './Header';
-import classes from './Login.module.scss';
+// import classes from './Login.module.scss';
 // import { Route, withRouter, Switch } from 'react-router-dom';
 import { usePlaidLink } from 'react-plaid-link';
 // function Login() {
@@ -20,7 +20,7 @@ import { usePlaidLink } from 'react-plaid-link';
 //     )
 // }
 
-const Login = () => {
+function Login() {
   const [linkToken, setLinkToken] = useState(null);
   const [temp, setTemp] = useState("");
   const [currentTime, setCurrentTime] = useState(0)
@@ -53,17 +53,15 @@ const Login = () => {
 
   return (
     <div>
+      <Header />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
       {linkToken != null ? <Link linkToken={linkToken} /> : <h1>error {currentTime}</h1>}
       <button onClick={() => generateInfo()}>click</button>
-      <Header>
-      </Header>
-      <div className={classes.login__intro}>
-        <h1>Login</h1>
-        <p>Login stuff will go here</p>
-        <a href="/mainmenu">
-          <button>Log in</button>
-        </a>
-      </div>
     </div>
   );
 
@@ -111,6 +109,6 @@ const Link: React.FC<LinkProps> = (props: LinkProps) => {
     </div>
   );
 };
-}
+
 
 export default Login
