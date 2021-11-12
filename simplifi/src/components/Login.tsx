@@ -1,35 +1,21 @@
 import React, { useEffect, useState } from 'react';
 import Header from './Header';
-// import classes from './Login.module.scss';
-// import { Route, withRouter, Switch } from 'react-router-dom';
 import { usePlaidLink } from 'react-plaid-link';
-// function Login() {
-//     return (
-//         <login>
-//             <Header>
-//             </Header>
-//             <video src="/videos/video.mp4" autoPlay mute loop />
-//             <div className={classes.login__intro}>
-//                 <h1>Login</h1>
-//                 <p>Login stuff will go here</p>
-//                 <a href="/mainmenu">
-//                     <button>Log in</button>
-//                 </a>
-//             </div>
-//         </login>
-//     )
-// }
+import { BrowserRouter as Router, Route, Switch, useHistory } from 'react-router-dom';
+import MainMenu from "../components/MainMenu"
+import { createHashHistory } from 'history'
 
 function Login() {
   const [linkToken, setLinkToken] = useState(null);
   const [temp, setTemp] = useState("");
   const [currentTime, setCurrentTime] = useState(0)
-
+  const history = useHistory();
   const generateToken = async () => {
+
     console.log("hello");
     const response = await fetch('/create_link_token');
     const data = await response.json();
-    console.log('data', data)
+    //console.log('data', data)
     setTemp("hey");
     setLinkToken(data.link_token);
   };
@@ -38,7 +24,8 @@ function Login() {
   // here we are calling for "loans"
   // the other options are: "investments", "transactions", "balance", "accounts"
   const generateInfo = async () => {
-    const response = await fetch('/loans');
+    history.push("/mainmenu");
+    const response = await fetch('/investments');
     const data = await response.json();
     console.log('data access', data)
   };
@@ -60,8 +47,16 @@ function Login() {
       <br />
       <br />
       <br />
-      {linkToken != null ? <Link linkToken={linkToken} /> : <h1>error {currentTime}</h1>}
       <button onClick={() => generateInfo()}>click</button>
+      <Router>
+        <div>
+          {linkToken != null ? <Link linkToken={linkToken} /> :
+            <Switch>
+              <Route path="/mainmenu" component={MainMenu} />
+            </Switch>
+          }
+        </div>
+      </Router >
     </div>
   );
 
@@ -81,7 +76,13 @@ function Login() {
 interface LinkProps {
   linkToken: string | null;
 }
+
 const Link: React.FC<LinkProps> = (props: LinkProps) => {
+  const sleep = () => {
+    return new Promise(resolve => setTimeout(resolve, 10000));
+  }
+  const [isOpen, setOpen] = useState(false);
+  const history = useHistory();
   const onSuccess = React.useCallback(async (public_token, metadata) => {
     // send public_token to server
     const response = await fetch('/set_access_token', {
@@ -93,17 +94,33 @@ const Link: React.FC<LinkProps> = (props: LinkProps) => {
     });
     // Handle response ...
     console.log(response);
+    setOpen(true);
   }, []);
+
   const config: Parameters<typeof usePlaidLink>[0] = {
     token: props.linkToken!,
     onSuccess,
   };
+
   const { open, ready } = usePlaidLink(config);
+
+  const redirect = async () => {
+    console.log("in REDIRECT")
+    await sleep();
+    history.push("/mainmenu");
+  }
+
   return (
     <div>
       <button onClick={() => open()} disabled={!ready}>
         Link account
       </button>
+      {isOpen ?
+        <Switch>
+          <Route path="/mainmenu" component={MainMenu} />
+        </Switch>
+        : history.push("/mainmenu")
+      }
 
 
     </div>
@@ -112,3 +129,5 @@ const Link: React.FC<LinkProps> = (props: LinkProps) => {
 
 
 export default Login
+
+//history.push("/mainmenu")
