@@ -41,20 +41,9 @@ function Login() {
   return (
     <div>
       <Header />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <button onClick={() => generateInfo()}>click</button>
       <Router>
         <div>
-          {linkToken != null ? <Link linkToken={linkToken} /> :
-            <Switch>
-              <Route path="/mainmenu" component={MainMenu} />
-            </Switch>
-          }
+          {linkToken != null ? <Link linkToken={linkToken} /> : <h1></h1>}
         </div>
       </Router >
     </div>
@@ -110,11 +99,16 @@ const Link: React.FC<LinkProps> = (props: LinkProps) => {
     history.push("/mainmenu");
   }
 
+  useEffect(() => {
+    open();
+  })
+
+  //   <button onClick={() => open()} disabled={!ready}>
+  //   Link account
+  // </button>
   return (
     <div>
-      <button onClick={() => open()} disabled={!ready}>
-        Link account
-      </button>
+      <h1></h1>
       {isOpen ?
         <Switch>
           <Route path="/mainmenu" component={MainMenu} />
