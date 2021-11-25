@@ -4,6 +4,7 @@ import { usePlaidLink } from 'react-plaid-link';
 import { BrowserRouter as Router, Route, Switch, useHistory } from 'react-router-dom';
 import MainMenu from "../components/MainMenu"
 import { createHashHistory } from 'history'
+import classes from './Login.module.scss';
 
 function Login() {
   const [linkToken, setLinkToken] = useState(null);
@@ -41,13 +42,13 @@ function Login() {
   return (
     <div>
       <Header />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <button onClick={() => generateInfo()}>click</button>
+      <video src="/videos/video.mp4" autoPlay loop/>
+            <img id='show_bg_2' src="/img/intro.jpg"/>
+      <div className={classes.hero__intro}>
+            <h1>Welcome to Simplifi!</h1>
+            <p>A personal financial tracker and visualizer</p>
+      <button className={classes.hero__buttons} onClick={() => generateInfo()}>Log in</button>
+      
       <Router>
         <div>
           {linkToken != null ? <Link linkToken={linkToken} /> :
@@ -55,8 +56,11 @@ function Login() {
               <Route path="/mainmenu" component={MainMenu} />
             </Switch>
           }
+          
         </div>
       </Router >
+      
+    </div>
     </div>
   );
 
@@ -111,18 +115,17 @@ const Link: React.FC<LinkProps> = (props: LinkProps) => {
   }
 
   return (
+    
     <div>
-      <button onClick={() => open()} disabled={!ready}>
+      <button className={classes.hero__buttons} onClick={() => open()} disabled={!ready}>
         Link account
       </button>
-      {isOpen ?
+      {/* {isOpen ?
         <Switch>
           <Route path="/mainmenu" component={MainMenu} />
         </Switch>
         : history.push("/mainmenu")
-      }
-
-
+      } */}
     </div>
   );
 };

@@ -9,25 +9,52 @@ video{
 
 }
 
+button{
+    border: none;
+        font-family: inherit;
+        font-size: 75%;
+        padding: 15px 32px;;
+        margin: 0;
+        color: $mainColor;
+        background-color: $navColor;
+        margin-top: 50px;
+}
+
+.db{
+    position: absolute;
+    text-align: center;
+    top: 42%;
+    left: 5%;
+}
+
 .MainMenu{
 
     overflow: auto;
-    padding-bottom: 100px;
+    padding-bottom: 80px;
 
     &__intro {
         color: $mainColor;
         position: absolute;
         text-align: center;
-        top: 42%;
+        top: 48%;
         left: 50%;
         transform: translateX(-50%) translateY(-50%);
         font-size: 45px;
+
     }  
 
-    &__buttons {
-        display: flex;
-        justify-content: space-between;
+    &__buttons2 {
+        border: none;
+        font-family: inherit;
+        font-size: 150%;
+        width: 100%;
+        padding: 5px;
+        height: 100%;
+        color: $mainColor;
+        background-color: $navColor;
+        margin-top: 50px;
        
     }  
+
 
 }

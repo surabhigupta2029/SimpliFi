@@ -10,16 +10,10 @@ const Header = (props) => {
          <nav className={classes.header__content__nav}>
              <ul>
                  <li>
-                     <a href="/">Home</a>
+                     <a href="/login">Home</a>
                  </li>
                  <li>
                      <a href="/about">About</a>
-                 </li>
-                 <li>
-                     <a href="/login">Log in</a>
-                 </li>
-                 <li>
-                     <a href="/signup">Sign up</a>
                  </li>
              </ul>
          </nav>

@@ -1,4 +1,3 @@
-from flask_cors import CORS
 import plaid
 from plaid.api import plaid_api
 from plaid.model.link_token_create_request_user import LinkTokenCreateRequestUser

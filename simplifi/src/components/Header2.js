@@ -13,7 +13,7 @@ const Header2 = (props) => {
                      <a href="/mainmenu">Dashboard</a>
                  </li>
                  <li>
-                     <a href="/logout">Log out</a>
+                     <a href="/login">Log out</a>
                  </li>
              </ul>
          </nav>
