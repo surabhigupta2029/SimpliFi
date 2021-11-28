@@ -66,29 +66,28 @@ def get_charts():
     url = 'https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=TSLA&apikey=OKI60N00VMW08R6N'
     r = requests.get(url)
     data = r.json()
+    page = requests.get(
+        "https://www.google.com/search?q=teslastocknewsarticle")
+    soup = BeautifulSoup(page.content, "html5lib")
+    links = soup.findAll("a")
+    i = 2
+    res = []
+    for link in links:
+        print(link["href"])
     return data
 
 
 @app.route('/getLinks', methods=['GET'])
 def get_links():
     page = requests.get("https://news.google.com/search?q=teslastock")
-    soup = BeautifulSoup(page.content)
+    soup = BeautifulSoup(page.content, "html5lib")
     links = soup.findAll("a")
     i = 2
     res = []
     for link in soup.find_all("a", href=re.compile("(?<=/url\?q=)(htt.*://.*)")):
-        temp = re.split(":(?=http)", link["href"].replace("/url?q=", ""))
-        res.add(temp)
-        i = i - 1
-    page = requests.get("https://news.google.com/search?q=ibmstock")
-    soup = BeautifulSoup(page.content)
-    links = soup.findAll("a")
-    i = 2
-    for link in soup.find_all("a", href=re.compile("(?<=/url\?q=)(htt.*://.*)")):
-        temp = re.split(":(?=http)", link["href"].replace("/url?q=", ""))
-        res.add(temp)
-        i = i - 1
-    return res.to_dict()
+        print(re.split(":(?=http)", link["href"].replace("/url?q=", "")))
+    print(res)
+    return jsonify(res)
 
 
 @app.route('/investmentsIBM', methods=['GET'])

@@ -237,6 +237,8 @@ function Investments() {
 
             <video src="/videos/video.mp4" autoPlay mute loop />
             <div className={classes.Investments__intro}>
+                <br />
+                <br />
                 <div className='tablediv'>
                     <table width="775px">
                         <tbody>
@@ -331,11 +333,32 @@ function Investments() {
                 /> */}
                 <div className={classes.Investments__titles}>
                     <h3>Relevant links</h3>
-
                 </div>
+                <div className={classes.Investments__linksStyle}>
+                    <table width="775px">
+                        <tbody>
+                            <tr>
+                                <th>  </th>
+                                <th>  </th>
+                                <th>  </th>
+                            </tr>
+
+                            <tr>
+                                <a href={"https://www.marketwatch.com/story/bear-market-awaits-tech-stocks-with-tesla-at-the-center-if-this-selloff-continues-strategist-warns-11637755879"}>Bear Market Awaits Tech Stocks With Tesla</a>
+                            </tr>
+                            <tr>
+                                <a href={"https://www.barrons.com/articles/what-ibm-investors-should-do-with-kyndryl-stock-51637917202"}>IBM Cast Off Kyndryl. Here’s What Investors Should Do With the Stock.</a>
+                            </tr>
+                            <tr>
+                                <a href={"https://www.independent.co.uk/news/world/americas/elon-musk-tesla-shares-sale-b1963942.html"}>Elon Musk Sells Shares</a>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
             </div>
 
-
+            <div className="rectangle">Hello world!</div>
 
 
         </investments>
