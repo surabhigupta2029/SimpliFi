@@ -72,8 +72,7 @@ def get_charts():
     links = soup.findAll("a")
     i = 2
     res = []
-    for link in links:
-        print(link["href"])
+
     return data
 
 
@@ -84,9 +83,7 @@ def get_links():
     links = soup.findAll("a")
     i = 2
     res = []
-    for link in soup.find_all("a", href=re.compile("(?<=/url\?q=)(htt.*://.*)")):
-        print(re.split(":(?=http)", link["href"].replace("/url?q=", "")))
-    print(res)
+
     return jsonify(res)
 
 
@@ -254,10 +251,9 @@ def get_balance():
 @app.route('/transactions', methods=['GET'])
 def get_transactions():
     # Pull transactions for the last 30 days
-    start_date = (datetime.datetime.now() - timedelta(days=60))
-    end_date = datetime.datetime.now() - timedelta(days=30)
+    start_date = (datetime.datetime.now() - timedelta(days=30))
+    end_date = datetime.datetime.now() - timedelta(days=0)
     print(start_date.date(), "   ", end_date.date(), "   ", access_token)
-    time.sleep(5000)
     try:
         options = TransactionsGetRequestOptions()
         request = TransactionsGetRequest(

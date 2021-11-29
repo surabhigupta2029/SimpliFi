@@ -11,12 +11,8 @@ function Login() {
   const [currentTime, setCurrentTime] = useState(0)
   const history = useHistory();
   const generateToken = async () => {
-
-    console.log("hello");
     const response = await fetch('/create_link_token');
     const data = await response.json();
-    //console.log('data', data)
-    setTemp("hey");
     setLinkToken(data.link_token);
   };
 
@@ -32,9 +28,6 @@ function Login() {
 
   useEffect(() => {
     generateToken();
-    fetch('/time').then(res => res.json()).then(data => {
-      setCurrentTime(data.time);
-    })
   }, []);
 
 
@@ -100,6 +93,7 @@ const Link: React.FC<LinkProps> = (props: LinkProps) => {
   }
 
   useEffect(() => {
+    console.log("AAAAAAAAAAAAAA")
     open();
   })
 

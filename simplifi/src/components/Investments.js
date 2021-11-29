@@ -20,7 +20,7 @@ function Investments() {
     const generateTSLAData = async () => {
         const response = await fetch('/investmentsTSLA');
         const data = await response.json();
-        console.log('AVANTAGE', data)
+        //console.log('AVANTAGE', data)
         setStockData(formatData(data['Time Series (Daily)']));
     };
 
@@ -28,29 +28,34 @@ function Investments() {
     const generateIBMData = async () => {
         const response = await fetch('/investmentsIBM');
         const data = await response.json();
-        console.log('AVANTAGE', data)
+        //console.log('AVANTAGE', data)
         IBMsetStockData(formatData(data['Time Series (Daily)']));
     };
 
     const generateGOOGData = async () => {
-        const response = await fetch('/investmentsGOOG');
+        const response = await fetch('/transactions');
         const data = await response.json();
-        console.log('AVANTAGE', data)
-        GOOGsetStockData(formatData(data['Time Series (Daily)']));
+        console.log('INVESTMENTS', data)
     };
 
     const generateLinks = async () => {
         const response = await fetch('/getLinks');
         const data = await response.json();
-        console.log('LINKSSS', data)
+        //console.log('LINKSSS', data)
         setLinks(data);
+    };
+
+    const generateInfo = async () => {
+        const response = await fetch('/transactions');
+        const data = await response.json();
+        console.log('data access', data)
     };
 
 
     useEffect(() => {
+        generateGOOGData();
         generateTSLAData();
         generateIBMData();
-        generateLinks();
     }, []
     );
 
@@ -71,11 +76,12 @@ function Investments() {
 
     const chart1 =
     {
+        theme: "light2", //"light2", "dark1", "dark2",
+        animationEnabled: true,
         title: {
-            text: "TESLA (TSLA)",
-            fontFamily: 'Raleway'
+            text: "Tesla (TSLA)",
         },
-        width: 500,
+        width: 550,
         axisY: {
             // Minimum value is 10% less than the lowest price in the dataset
             minimum: Math.min(...stockData.map(data => data.low)) / 1.1,
@@ -150,11 +156,12 @@ function Investments() {
 
     const chart2 =
     {
+        theme: "light2", //"light2", "dark1", "dark2",
+        animationEnabled: true,
         title: {
             text: "International Business Machines (IBM)",
-            fontFamily: 'Raleway'
         },
-        width: 500,
+        width: 550,
         axisY: {
             // Minimum value is 10% less than the lowest price in the dataset
             minimum: Math.min(...IBMstockData.map(data => data.low)) / 1.1,
@@ -230,138 +237,73 @@ function Investments() {
 
 
     return (
-        <investments>
+        <div className={classes.mainDiv}>
+
             <Header2>
             </Header2>
+            <div className={classes.mainDiv_content}>
+                <video src="/videos/video.mp4" autoPlay mute loop />
+                <div className={classes.Investments__intro}>
+                    <br />
+                    <br />
+                    <br />
+                    {/* <button onClick={() => generateInfo()}>click</button> */}
+                    <div className='tablediv'>
+                        <table width="900px">
+                            <tbody>
+                                <tr>
+                                    <th>  </th>
+                                    <th>  </th>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <CanvasJSChart options={chart1} />
+                                    </td>
+                                    <br />
+                                    <br />
+                                    <br />
+                                    <br />
+                                    <br />
+                                    <br />
 
+                                    <td>
+                                        <CanvasJSChart options={chart2} />
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <br />
+                    <div className={classes.Investments__titles}>
+                        <h3>Relevant links</h3>
+                    </div>
+                    <div className={classes.Investments__linksStyle}>
+                        <table width="775px">
+                            <tbody>
+                                <tr>
+                                    <th>  </th>
+                                    <th>  </th>
+                                    <th>  </th>
+                                </tr>
 
-            <video src="/videos/video.mp4" autoPlay mute loop />
-            <div className={classes.Investments__intro}>
-                <br />
-                <br />
-                <div className='tablediv'>
-                    <table width="775px">
-                        <tbody>
-                            <tr>
-                                <th>  </th>
-                                <th>  </th>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <CanvasJSChart options={chart1} />
-                                </td>
-                                <br />
-                                <br />
-                                <br />
-                                <td>
-                                    <CanvasJSChart options={chart2} />
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-                <br />
-                {/* <CanvasJSChart
-                    options={{
-                        axisY: {
-                            // Minimum value is 10% less than the lowest price in the dataset
-                            minimum: Math.min(...IBMstockData.map(data => data.low)) / 1.1,
-                            // Minimum value is 10% more than the highest price in the dataset
-                            maximum: Math.max(...IBMstockData.map(data => data.high)) * 1.1,
-                            crosshair: {
-                                enabled: true,
-                                snapToDataPoint: true
-                            }
-                        },
-                        axisX: {
-                            crosshair: {
-                                enabled: true,
-                                snapToDataPoint: true
-                            },
-                            scaleBreaks: {
-                                spacing: 0,
-                                fillOpacity: 0,
-                                lineThickness: 0,
-                                customBreaks: IBMstockData.reduce((breaks, value, index, array) => {
-                                    // Just return on the first iteration
-                                    // Since there is no previous data point
-                                    if (index === 0) return breaks;
+                                <tr>
+                                    <a href={"https://www.marketwatch.com/story/bear-market-awaits-tech-stocks-with-tesla-at-the-center-if-this-selloff-continues-strategist-warns-11637755879"}>Bear Market Awaits Tech Stocks With Tesla</a>
+                                </tr>
+                                <tr>
+                                    <a href={"https://www.barrons.com/articles/what-ibm-investors-should-do-with-kyndryl-stock-51637917202"}>IBM Cast Off Kyndryl. Here’s What Investors Should Do With the Stock.</a>
+                                </tr>
+                                <tr>
+                                    <a href={"https://www.independent.co.uk/news/world/americas/elon-musk-tesla-shares-sale-b1963942.html"}>Elon Musk Sells Shares</a>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
 
-                                    // Time in UNIX for current and previous data points
-                                    const currentDataPointUnix = Number(new Date(value.date));
-                                    const previousDataPointUnix = Number(new Date(array[index - 1].date));
-
-                                    // One day converted to milliseconds
-                                    const oneDayInMs = 86400000;
-
-                                    // Difference between the current and previous data points
-                                    // In milliseconds
-                                    const difference = previousDataPointUnix - currentDataPointUnix;
-
-                                    return difference === oneDayInMs
-                                        // Difference is 1 day, no scale break is needed
-                                        ? breaks
-                                        // Difference is more than 1 day, need to create
-                                        // A new scale break
-                                        : [
-                                            ...breaks,
-                                            {
-                                                startValue: currentDataPointUnix,
-                                                endValue: previousDataPointUnix - oneDayInMs
-                                            }
-                                        ]
-                                }, [])
-                            }
-                        },
-                        data: [
-                            {
-                                type: 'candlestick',
-                                dataPoints: IBMstockData.map(stockData => ({
-                                    x: new Date(stockData.date),
-                                    // The OHLC for the data point
-                                    // The order is IMPORTANT!
-                                    y: [
-                                        stockData.open,
-                                        stockData.high,
-                                        stockData.low,
-                                        stockData.close
-                                    ]
-                                }))
-                            }
-                        ]
-                    }}
-                /> */}
-                <div className={classes.Investments__titles}>
-                    <h3>Relevant links</h3>
-                </div>
-                <div className={classes.Investments__linksStyle}>
-                    <table width="775px">
-                        <tbody>
-                            <tr>
-                                <th>  </th>
-                                <th>  </th>
-                                <th>  </th>
-                            </tr>
-
-                            <tr>
-                                <a href={"https://www.marketwatch.com/story/bear-market-awaits-tech-stocks-with-tesla-at-the-center-if-this-selloff-continues-strategist-warns-11637755879"}>Bear Market Awaits Tech Stocks With Tesla</a>
-                            </tr>
-                            <tr>
-                                <a href={"https://www.barrons.com/articles/what-ibm-investors-should-do-with-kyndryl-stock-51637917202"}>IBM Cast Off Kyndryl. Here’s What Investors Should Do With the Stock.</a>
-                            </tr>
-                            <tr>
-                                <a href={"https://www.independent.co.uk/news/world/americas/elon-musk-tesla-shares-sale-b1963942.html"}>Elon Musk Sells Shares</a>
-                            </tr>
-                        </tbody>
-                    </table>
                 </div>
 
+                <div className="rectangle">Hello world!</div>
             </div>
-
-            <div className="rectangle">Hello world!</div>
-
-
-        </investments>
+        </div>
     )
 }
 
