@@ -1,4 +1,4 @@
-from flask_cors import CORS
+# from flask_cors import CORS
 import plaid
 from plaid.api import plaid_api
 from plaid.model.link_token_create_request_user import LinkTokenCreateRequestUser
@@ -208,7 +208,7 @@ def get_transactions():
     start_date = (datetime.datetime.now() - timedelta(days=60))
     end_date = datetime.datetime.now() - timedelta(days=30)
     print(start_date.date(), "   ", end_date.date(), "   ", access_token)
-    time.sleep(5000)
+    # time.sleep(5000)
     try:
         options = TransactionsGetRequestOptions()
         request = TransactionsGetRequest(

@@ -1,19 +1,23 @@
-import React, { useEffect, useState } from 'react';
-import Header from './Header';
-import { usePlaidLink } from 'react-plaid-link';
-import { BrowserRouter as Router, Route, Switch, useHistory } from 'react-router-dom';
-import MainMenu from "../components/MainMenu"
-import { createHashHistory } from 'history'
+import React, { useEffect, useState } from "react";
+import Header from "./Header";
+import { usePlaidLink } from "react-plaid-link";
+import {
+  BrowserRouter as Router,
+  Route,
+  Switch,
+  useHistory,
+} from "react-router-dom";
+import MainMenu from "../components/MainMenu";
+import { createHashHistory } from "history";
 
 function Login() {
   const [linkToken, setLinkToken] = useState(null);
   const [temp, setTemp] = useState("");
-  const [currentTime, setCurrentTime] = useState(0)
+  const [currentTime, setCurrentTime] = useState(0);
   const history = useHistory();
   const generateToken = async () => {
-
     console.log("hello");
-    const response = await fetch('/create_link_token');
+    const response = await fetch("/create_link_token");
     const data = await response.json();
     //console.log('data', data)
     setTemp("hey");
@@ -25,18 +29,19 @@ function Login() {
   // the other options are: "investments", "transactions", "balance", "accounts"
   const generateInfo = async () => {
     history.push("/mainmenu");
-    const response = await fetch('/investments');
+    const response = await fetch("/transactions");
     const data = await response.json();
-    console.log('data access', data)
+    console.log("data access", data);
   };
 
   useEffect(() => {
     generateToken();
-    fetch('/time').then(res => res.json()).then(data => {
-      setCurrentTime(data.time);
-    })
+    fetch("/time")
+      .then((res) => res.json())
+      .then((data) => {
+        setCurrentTime(data.time);
+      });
   }, []);
-
 
   return (
     <div>
@@ -50,20 +55,18 @@ function Login() {
       <button onClick={() => generateInfo()}>click</button>
       <Router>
         <div>
-          {linkToken != null ? <Link linkToken={linkToken} /> :
+          {linkToken != null ? (
+            <Link linkToken={linkToken} />
+          ) : (
             <Switch>
               <Route path="/mainmenu" component={MainMenu} />
             </Switch>
-          }
+          )}
         </div>
-      </Router >
+      </Router>
     </div>
   );
-
-};
-
-
-
+}
 
 //   // useEffect(() => {
 //   //   fetch('/time').then(res => res.json()).then(data => {
@@ -79,16 +82,16 @@ interface LinkProps {
 
 const Link: React.FC<LinkProps> = (props: LinkProps) => {
   const sleep = () => {
-    return new Promise(resolve => setTimeout(resolve, 10000));
-  }
+    return new Promise((resolve) => setTimeout(resolve, 10000));
+  };
   const [isOpen, setOpen] = useState(false);
   const history = useHistory();
   const onSuccess = React.useCallback(async (public_token, metadata) => {
     // send public_token to server
-    const response = await fetch('/set_access_token', {
-      method: 'POST',
+    const response = await fetch("/set_access_token", {
+      method: "POST",
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
       body: JSON.stringify({ public_token }),
     });
@@ -105,29 +108,27 @@ const Link: React.FC<LinkProps> = (props: LinkProps) => {
   const { open, ready } = usePlaidLink(config);
 
   const redirect = async () => {
-    console.log("in REDIRECT")
+    console.log("in REDIRECT");
     await sleep();
     history.push("/mainmenu");
-  }
+  };
 
   return (
     <div>
       <button onClick={() => open()} disabled={!ready}>
         Link account
       </button>
-      {isOpen ?
+      {isOpen ? (
         <Switch>
           <Route path="/mainmenu" component={MainMenu} />
         </Switch>
-        : history.push("/mainmenu")
-      }
-
-
+      ) : (
+        history.push("/mainmenu")
+      )}
     </div>
   );
 };
 
-
-export default Login
+export default Login;
 
 //history.push("/mainmenu")
