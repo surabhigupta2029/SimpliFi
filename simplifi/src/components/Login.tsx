@@ -47,7 +47,6 @@ function Login() {
       <div className={classes.hero__intro}>
             <h1>Welcome to Simplifi!</h1>
             <p>A personal financial tracker and visualizer</p>
-      <button className={classes.hero__buttons} onClick={() => generateInfo()}>Log in</button>
       
       <Router>
         <div>
