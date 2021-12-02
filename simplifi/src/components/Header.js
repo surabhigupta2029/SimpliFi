@@ -19,9 +19,6 @@ const Header = (props) => {
                         <li>
                             <Link to="/login">Log in</Link>
                         </li>
-                        <li>
-                            <Link to="/signup">Sign up</Link>
-                        </li>
                     </ul>
                 </nav>
                 <div className={classes.header__content__toggle}>

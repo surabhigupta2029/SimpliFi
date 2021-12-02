@@ -9,6 +9,12 @@ video{
 
 }
 
+img{
+    height: 900px;
+    width: 1000px;
+    
+}
+
 .hero{
 
     overflow: auto;
@@ -18,11 +24,23 @@ video{
         color: $mainColor;
         position: absolute;
         text-align: center;
-        top: 42%;
-        left: 50%;
+        top: 49%;
+        left: 76%;
         transform: translateX(-50%) translateY(-50%);
-        font-size: 45px;
+        font-size: 30px;
     }
+
+    
+    &__buttons{
+        border: none;
+        font-family: inherit;
+        font-size: 150%;
+        padding: 15px 32px;;
+        margin: 0;
+        color: $mainColor;
+        background-color: $navColor;
+        margin-top: 50px;
+        }
 
     &__content {
            

@@ -11,22 +11,20 @@ function MainMenu() {
             <video src="/videos/video.mp4" autoPlay mute loop />
             <div className={classes.MainMenu__intro}>
                 <h1>Dashboard</h1>
-                <div className={classes.MainMenu__buttons}>
-                    <Link to="/transactions">
-                        <button>Transactions</button>
-                    </Link>
-                    <Link to="/balances">
-                        <button>Balances</button>
-                    </Link>
-                    <Link to="/loans">
-                        <button>Loans</button>
-                    </Link>
-                    <Link to="/investments">
-                        <button>Investments</button>
-                    </Link>
-                </div>
+                <a href="/transactions">
+                    <button className={classes.MainMenu__buttons2}>Transactions</button>
+                </a>
+                <a href="/balances">
+                    <button className={classes.MainMenu__buttons2}>Balances</button>
+                </a>
+                <a href="/loans">
+                    <button className={classes.MainMenu__buttons2}>Loans</button>
+                </a>
+                <a href="/investments">
+                    <button className={classes.MainMenu__buttons2}>Investments</button>
+                </a>
             </div>
-        </mainmenu>
+        </mainmenu >
     )
 }
 

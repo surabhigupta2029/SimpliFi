@@ -7,17 +7,12 @@ function Hero() {
         <hero>
             <Header>
             </Header>
-            <video src="/videos/video.mp4" autoPlay mute loop/>
-        <div className={classes.hero__intro}>
-            <h1>Welcome to Simplifi!</h1>
-            <p>Content for the website descritpion will go here!</p>
-        </div>
-        
-        <div className={classes.hero__content}>
-           <div className={classes.hero__content__circle}></div>
-           <div className={classes.hero__content__circle}></div>
-           <div className={classes.hero__content__circle}></div>
-        </div>
+            <video src="/videos/video.mp4" autoPlay mute loop />
+            <img id='show_bg_2' src="/img/intro.jpg" />
+            <div className={classes.hero__intro}>
+                <h1>Welcome to Simplifi!</h1>
+                <p>A personalized financial tracker and visualizer</p>
+            </div>
         </hero>
     )
 }

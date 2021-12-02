@@ -10,6 +10,7 @@ function Login() {
   const [temp, setTemp] = useState("");
   const [currentTime, setCurrentTime] = useState(0)
   const history = useHistory();
+
   const generateToken = async () => {
     const response = await fetch('/create_link_token');
     const data = await response.json();
