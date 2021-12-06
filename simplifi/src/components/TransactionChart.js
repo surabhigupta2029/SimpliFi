@@ -1,11 +1,16 @@
 import React, { useEffect, useState } from "react";
-import { Bar, Doughnut } from "react-chartjs-2";
-import { Chart, ArcElement } from "chart.js";
-Chart.register(ArcElement);
+import * as agCharts from "ag-charts-community";
+import { AgChartsReact } from "ag-charts-react";
 
 export default function TransactionChart() {
-  const [chartData, setChartData] = useState({});
-
+  const [data, setData] = useState([]);
+  const series = [
+    {
+      type: "pie",
+      angleKey: "value",
+      labelKey: "label",
+    },
+  ];
   useEffect(() => {
     fetchData();
   }, []);
@@ -13,60 +18,58 @@ export default function TransactionChart() {
   const fetchData = async () => {
     const response = await fetch("/transactions");
     const data = await response.json();
-    console.log(data.transactions);
+    //console.log(data);
 
     let transactions = data.transactions;
-    let labels = [];
-    let t = transactions.map((trans) => {
-      const tuple = {};
-      tuple.category = trans.category[0];
-      tuple.amount = trans.amount;
-      return tuple;
+
+    let allLabel = transactions.map((trans) => {
+      return trans.category[0];
     });
 
-    let categories = t.map((obj) => obj.category);
-    labels = [...new Set(categories)].sort();
+    let labels = [...new Set(allLabel)].sort();
+    console.log(labels);
 
     let transactionData = [];
     let sum = 0;
     for (let i = 0; i < labels.length; i++) {
-      for (let j = 0; j < t.length; j++) {
-        if (labels[i] === t[j].category && t[j].amount > 0) {
-          sum += t[j].amount;
+      for (let j = 0; j < transactions.length; j++) {
+        if (
+          labels[i] === transactions[j].category[0] &&
+          transactions[j].amount > 0
+        ) {
+          sum += transactions[j].amount;
         }
       }
       transactionData.push(sum);
       sum = 0;
     }
 
-    let testLabel = ["A", "B", "C", "D", "E"];
-    let testData = [20, 10, 15, 50, 70];
+    console.log(transactionData);
 
-    setChartData({
-      labels: labels,
-      datasets: [
-        {
-          label: "Population",
-          data: transactionData,
-          backgroundColor: [
-            "rgba(75,190,232,255)",
-            "rgba(172,123,184,255)",
-            "rgba(255,0,151,255)",
-            "rgba(254,0,0,255)",
-            "rgba(255,161,2,255)",
-            "rgba(254,228,13,255)",
-          ],
-        },
-      ],
+    let chartData = labels.map((label, i) => {
+      const tuple = {};
+      tuple.label = label;
+      tuple.value = transactionData[i];
+      return tuple;
     });
+
+    setData(chartData);
   };
 
   return (
     <div>
-      {Object.keys(chartData).length && (
-        <div className="chart-container">
-          <div className="chart">
-            <Doughnut data={chartData} options={{}} />
+      {Object.keys(data).length && (
+        <div className="chart-container" style={{ display: "inline-block" }}>
+          <div
+            className="chart"
+            style={{ width: "500px", height: "300px", display: "inline-block" }}
+          >
+            <AgChartsReact
+              options={{
+                data: data,
+                series: series,
+              }}
+            />
           </div>
         </div>
       )}

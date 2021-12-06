@@ -1,0 +1,50 @@
+body {
+  background-color: white;
+  color: black;
+}
+
+.empty-navbar {
+  height: 100px;
+}
+
+.transactions-title {
+  text-align: center;
+  font-size: 24px;
+}
+
+.transactions-data {
+  display: flex;
+  justify-content: space-around;
+}
+
+.transactions-table {
+  border-collapse: collapse;
+  margin: 25px 0;
+  font-size: 0.9em;
+  font-family: sans-serif;
+  min-width: 400px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+}
+
+.transactions-table thead tr {
+  background-color: #622ea6;
+  color: #ffffff;
+  text-align: left;
+}
+
+.transactions-table th,
+.transactions-table td {
+  padding: 12px 15px;
+}
+
+.transactions-table tbody tr {
+  border-bottom: 1px solid #dddddd;
+}
+
+.transactions-table tbody tr:nth-of-type(even) {
+  background-color: #f3f3f3;
+}
+
+.transactions-table tbody tr:last-of-type {
+  border-bottom: 2px solid #622ea6;
+}
