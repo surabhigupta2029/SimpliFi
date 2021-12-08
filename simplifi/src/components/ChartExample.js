@@ -1,12 +1,14 @@
 import React, { Component } from 'react';
+import { cloneDeep } from 'lodash';
+import { render } from 'react-dom';
 import * as agCharts from 'ag-charts-community';
 import { AgChartsReact } from 'ag-charts-react';
-import { Chart } from 'react-chartjs-2';
+
 
 class ChartExample extends Component {
   constructor(props) {
     super(props);
-
+    
     this.state = {
       names: [],
       curs: [],
@@ -14,28 +16,41 @@ class ChartExample extends Component {
         data: [
           {
             label: 'Checking',
-            value: 110,
+            value: 110.00,
           },
           {
             label: 'Saving',
-            value: 210,
+            value: 210.00,
           },
           {
-            label: 'Student Loan',
-            value: 900,
-          },
-          {
-            label: 'IRA',
-            value: 320.76,
+            label: 'Mortgage',
+            value: 56302.06,
           },
           {
             label: 'Credit Card',
-            value: 588,
+            value: 410.00,
+          },
+          {
+            label: 'CD',
+            value: 1000.00,
+          },
+          {
+            label: '401k',
+            value: 23631.98,
+          },
+          {
+            label: 'Money Market',
+            value: 43200.00,
+          },
+          {
+            label: 'Student Loan',
+            value: 65262.00,
           },
         ],
         series: [
           {
             type: 'pie',
+            innerRadiusOffset: -50,
             angleKey: 'value',
             labelKey: 'label',
           },
@@ -43,36 +58,10 @@ class ChartExample extends Component {
       },
     };
   }
-
   async componentDidMount() {
-    // const response = await fetch("/balance");
-    // const data = await response.json();
-    // console.log(data);
-
-    // let labels = [];
-    // let t = data.accounts.map((trans) => {
-    //   const balanceData = {};
-    //   balanceData.name = trans.name;
-    //   balanceData.current = trans.balances.current;
-    //   return balanceData;
-    // });
-
-    // let categories = t.map((obj) => obj.category);
-    // labels = [...new Set(categories)].sort();
-    // console.log(t[0].name)
-    // let names = []
-    // let curs = []
-
-    // var keys = Object.keys(t);
-    // keys.forEach(function (key) {
-    //   console.log(key, t[key]);
-    //   names.push(t[key].name)
-    //   curs.push(t[key].current)
-    // });
-
-
-    // this.setState({ names: names });
-    // this.setState({ curs: curs });
+     const response = await fetch("/balance");
+     const data = await response.json();
+     console.log(data.balance);
   }
 
   render() {

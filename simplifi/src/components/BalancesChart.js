@@ -1,23 +1,41 @@
 import React, { useEffect, useState } from "react";
-import { Bar } from "react-chartjs-2";
 import { Chart, ArcElement } from "chart.js";
-import Doughnut from './DoughnutChart';
 import Example from './ChartExample';
+import classes from './Balances.module.scss';
+import { AgGridColumn, AgGridReact } from '@ag-grid-community/react';
+import '@ag-grid-community/core/dist/styles/ag-grid.css';
+import "@ag-grid-community/core/dist/styles/ag-theme-alpine.css";
 Chart.register(ArcElement);
 
 export default function BalanceChart() {
   const [chartData, setChartData] = useState({});
+  const [gridApi, setGridApi] = useState(null);
+  const [rowData, setRowData] = useState(null);
+  const [style, setStyle] = useState({
+      height: '100%',
+      width: '100%'
+  });
 
   useEffect(() => {
     getBalance();
-  }, []);
+    if (gridApi) {
+      gridApi.sizeColumnsToFit();
+    }
+
+    const setWidthAndHeight = (width, height) => {
+      setStyle({
+         width,
+          height
+      });
+    };
+  }, [rowData]);
 
   const getBalance = async () => {
     // const response = await fetch("/balance");
     // const data = await response.json();
-    // console.log(data);
-
+    // console.log(data.balance);
     // let labels = [];
+
     // let t = data.accounts.map((trans) => {
     //   const balanceData = {};
     //   balanceData.name = trans.name;
@@ -62,38 +80,18 @@ export default function BalanceChart() {
     //   ],
 
     // });
-  };
 
+  }
   // TO ADD: credit card image and also the credit card specific numbers
 
   return (
-    <div>
+    <div className={classes.Balances_Chart}>
       {/* <Doughnut /> */}
       <Example />
 
     </div>
   );
 }
-
-// {Object.keys(chartData).length && (
-//   <div className="chart-container">
-//     <div className="chart">
-//       {/* <Doughnut data={chartData} options={{
-//         legend: { display: true, position: "right" },
-
-//         datalabels: {
-//           display: true,
-//           color: "white",
-//         },
-//         tooltips: {
-//           backgroundColor: "#5a6e7f",
-//         },
-
-//       }} /> */}
-
-//     </div>
-//   </div>
-// )}
 
 
 

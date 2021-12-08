@@ -19,9 +19,17 @@ video{
         position: absolute;
         text-align: center;
         top: 42%;
-        left: 50%;
+        right: 40%;
         transform: translateX(-50%) translateY(-50%);
         font-size: 45px;
     }  
 
+    &__Chart {
+        margin-left: 75%;
+    }
+
+    &__Card {
+        margin-left: 60%;
+        margin-top: 20%;
+    }
 }
