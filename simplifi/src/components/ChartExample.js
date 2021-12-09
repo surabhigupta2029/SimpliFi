@@ -36,9 +36,9 @@ class ChartExample extends Component {
                 theme: myTheme,
                 autoSize: true,
                 padding: {
-                    left: 7,
-                    right: 70,
-                    top: 80,
+                    left: 70,
+                    right: 30,
+                    top: 90,
                     bottom: 65,
                 },
                 title: { text: 'Breakdown', fontFamily: 'Montserrat', fontSize: 25 },
@@ -61,14 +61,14 @@ class ChartExample extends Component {
                     },
                     {
                         label: 'Credit Card',
-                        value: 588,
+                        value: 410,
                     },
                 ],
                 series: [
                     {
                         type: 'pie',
-                        outerRadiusOffset: 18,
-                        innerRadiusOffset: 2,
+                        outerRadiusOffset: 20,
+                        innerRadiusOffset: -20,
                         angleKey: 'value',
                         labelKey: 'label',
                     },

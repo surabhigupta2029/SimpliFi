@@ -66,7 +66,7 @@ export default function BalanceChart() {
     // TO ADD: credit card image and also the credit card specific numbers
 
     return (
-        <div>
+        <div style={{ height: '700px', width: '750px' }}>
             {/* <Doughnut /> */}
             <Example />
 

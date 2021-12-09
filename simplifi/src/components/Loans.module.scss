@@ -19,9 +19,42 @@ video{
         position: absolute;
         text-align: center;
         top: 42%;
+        width: 750px;
+        height: 450px;
         left: 50%;
         transform: translateX(-50%) translateY(-50%);
         font-size: 45px;
-    }  
+
+        h1{
+            margin-top: -5%;
+            padding-bottom: 2%;
+            font-size: 55px;
+        }
+
+        Card{
+            margin-left: 10%;
+        }
+    }
+    
+    &__stats {
+        top: 10%;
+        h1{
+            margin-top: 3%;
+            margin-right: 85%;
+            font-size: 25px;
+            color: rgb(245, 245, 245);
+        }
+        tbody{
+            tr{
+                td{
+                    font-size: 25px;
+                    padding: 0;
+                }
+            }
+        }
+    }
+
+ 
+    
 
 }
