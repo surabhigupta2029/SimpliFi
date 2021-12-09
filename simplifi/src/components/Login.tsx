@@ -24,7 +24,6 @@ function Login() {
   // here we are calling for "loans"
   // the other options are: "investments", "transactions", "balance", "accounts"
   const generateInfo = async () => {
-    history.push("/mainmenu");
     const response = await fetch('/investments');
     const data = await response.json();
     console.log('data access', data)
@@ -32,9 +31,6 @@ function Login() {
 
   useEffect(() => {
     generateToken();
-    fetch('/time').then(res => res.json()).then(data => {
-      setCurrentTime(data.time);
-    })
   }, []);
 
 

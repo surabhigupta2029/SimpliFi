@@ -8,13 +8,41 @@ function Balances() {
         <balances>
             <Header2>
             </Header2>
-
+            <video src="/videos/video.mp4" autoPlay mute loop />
             <div className={classes.Balances__intro}>
-                <a href="/mainmenu">
-                    <BalanceChart />
-
-                    <button>Back</button>
-                </a>
+                <BalanceChart />
+            </div>
+            <div className={classes.Balances__Card}>
+                <img src='/card2.png' height='250' width='250' />
+                <div className={classes.Balances__Text}>
+                    <h1>Credit Card</h1>
+                    <tbody>
+                        <tr>
+                            <td>
+                                Limit.....................
+                            </td>
+                            <td>
+                                $2000
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                Current...............
+                            </td>
+                            <td>
+                                $410
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                Currency............
+                            </td>
+                            <td>
+                                USD
+                            </td>
+                        </tr>
+                    </tbody>
+                </div>
             </div>
         </balances>
     )

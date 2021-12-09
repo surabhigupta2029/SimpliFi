@@ -1,4 +1,5 @@
 @import "./../styles/variables.scss";
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@200&display=swap');
 
 video{
     object-fit: cover;
@@ -18,10 +19,44 @@ video{
         color: $mainColor;
         position: absolute;
         text-align: center;
-        top: 42%;
-        left: 50%;
+        top: 50%;
+        left: 35%;
         transform: translateX(-50%) translateY(-50%);
         font-size: 45px;
     }  
+
+    &__Chart {
+        margin-left: 75%;
+    }
+
+    &__Card {
+        margin-left: 65%;
+        padding-top: 10%;
+    }
+
+    &__Text{
+        margin-left: 10%;
+        padding-top: 2%;
+        color:rgb(146, 132, 223);
+        font-family: 'Montserrat'!important;
+
+        h1{
+            font-family: 'Montserrat'!important;
+        }
+        h2{
+            padding-left: 9%;
+            font-size: 20px !important;
+        }
+        tbody{
+            padding-left: 2% !important;
+            tr{
+                td{
+                    padding-left: 5%;
+                    font-style: italic;
+                    font-weight: 600;
+                }
+            }
+        }
+    }
 
 }

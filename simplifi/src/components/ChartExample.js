@@ -3,7 +3,30 @@ import * as agCharts from 'ag-charts-community';
 import { AgChartsReact } from 'ag-charts-react';
 import { Chart } from 'react-chartjs-2';
 
+var myTheme = {
+  baseTheme: 'ag-default-dark',
+  palette: {
+    fills: ['#5C2983', '#0076C5', '#21B372', '#FDDE02', '#F76700', '#D30018'],
+    strokes: ['black'],
+  },
+  overrides: {
+    cartesian: {
+      title: { fontSize: 24 },
+      series: {
+        column: {
+          label: {
+            enabled: true,
+            color: 'black',
+          },
+        },
+      },
+    },
+  },
+};
+
 class ChartExample extends Component {
+
+
   constructor(props) {
     super(props);
 
@@ -11,6 +34,15 @@ class ChartExample extends Component {
       names: [],
       curs: [],
       options: {
+        theme: myTheme,
+        autoSize: true,
+        padding: {
+          left: 7,
+          right: 70,
+          top: 80,
+          bottom: 65,
+        },
+        title: { text: 'Breakdown', fontFamily: 'Montserrat', fontSize: 25 },
         data: [
           {
             label: 'Checking',
@@ -36,6 +68,8 @@ class ChartExample extends Component {
         series: [
           {
             type: 'pie',
+            outerRadiusOffset: 18,
+            innerRadiusOffset: 2,
             angleKey: 'value',
             labelKey: 'label',
           },
@@ -76,7 +110,7 @@ class ChartExample extends Component {
   }
 
   render() {
-    return <AgChartsReact options={this.state.options} />;
+    return <AgChartsReact style={{ width: 500, height: 200 }} options={this.state.options} />;
   }
 }
 
