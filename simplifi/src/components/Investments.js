@@ -244,11 +244,15 @@ function Investments() {
             <div className={classes.mainDiv_content}>
                 <video src="/videos/video.mp4" autoPlay mute loop />
                 <div className={classes.Investments__intro}>
+
                     <br />
                     <br />
                     <br />
                     {/* <button onClick={() => generateInfo()}>click</button> */}
+                    <h2>Investments</h2>
                     <div className='tablediv'>
+
+
                         <table width="900px">
                             <tbody>
                                 <tr>

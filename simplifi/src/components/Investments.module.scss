@@ -39,6 +39,11 @@ video{
         height: 150%;
         transform: translateX(-50%) translateY(-50%);
         font-size: 45px;
+
+        h2{
+            padding-left: 27%;
+            padding-bottom: 3%;
+        }
     }
 
     &__titles {

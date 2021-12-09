@@ -24,10 +24,10 @@ function Loans() {
             <Header2>
             </Header2>
             <video src="/videos/video.mp4" autoPlay mute loop />
-            <Card style={{ width: '20rem', paddingTop: '350px', marginLeft: '150px', left: '80px', color: 'white', fontSize: '25px' }}>
+            <Card style={{ width: '20rem', paddingTop: '350px', marginLeft: '150px', left: '80px', color: 'rgb(146, 132, 223)', fontSize: '29px' }}>
                 <Card.Body>
-                    <Card.Title>Student Loan</Card.Title>
-                    <Card.Text style={{ fontSize: '15px' }}>
+                    <Card.Title style={{ textDecorationLine: 'underline' }}>Student Loan</Card.Title>
+                    <Card.Text style={{ fontSize: '18px' }}>
                         <br />
                         <h3>Payment Amount: $138.05</h3>
 
@@ -47,7 +47,7 @@ function Loans() {
 
                 <LoansChart />
                 <div className={classes.Loans__stats}>
-                    <h1>Summary</h1>
+                    <h1 style={{ textDecorationLine: 'underline' }}>Summary</h1>
                     <tbody>
                         <tr>
                             <td>

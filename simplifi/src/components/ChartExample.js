@@ -36,8 +36,8 @@ class ChartExample extends Component {
                 theme: myTheme,
                 autoSize: true,
                 padding: {
-                    left: 70,
-                    right: 30,
+                    left: 90,
+                    right: 20,
                     top: 90,
                     bottom: 65,
                 },

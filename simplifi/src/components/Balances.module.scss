@@ -18,13 +18,18 @@ video{
     &__intro {
         color: $mainColor;
         width: 500px;
-        height: 1000px;
+        height: 200px;
         position: absolute;
         text-align: center;
-        top: 65%;
-        left: 35%;
+        top: 25%;
+        left: 25%;
         transform: translateX(-50%) translateY(-50%);
         font-size: 45px;
+
+        h2{
+            padding-left: 115%;
+            padding-bottom: 3%;
+        }
     }  
 
     &__Chart {
@@ -32,8 +37,8 @@ video{
     }
 
     &__Card {
-        margin-left: 65%;
-        padding-top: 15%;
+        margin-left: 58%;
+        padding-top: 18%;
 
         img{
             height: 250px;

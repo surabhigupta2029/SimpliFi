@@ -10,6 +10,7 @@ function Balances() {
             </Header2>
             <video src="/videos/video.mp4" autoPlay mute loop />
             <div className={classes.Balances__intro}>
+                <h2>Balances</h2>
                 <BalanceChart />
             </div>
 
