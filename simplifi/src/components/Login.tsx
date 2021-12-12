@@ -10,13 +10,10 @@ function Login() {
   const [temp, setTemp] = useState("");
   const [currentTime, setCurrentTime] = useState(0)
   const history = useHistory();
-  const generateToken = async () => {
 
-    console.log("hello");
+  const generateToken = async () => {
     const response = await fetch('/create_link_token');
     const data = await response.json();
-    //console.log('data', data)
-    setTemp("hey");
     setLinkToken(data.link_token);
   };
 
@@ -32,29 +29,15 @@ function Login() {
 
   useEffect(() => {
     generateToken();
-    fetch('/time').then(res => res.json()).then(data => {
-      setCurrentTime(data.time);
-    })
   }, []);
 
 
   return (
     <div>
       <Header />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <button onClick={() => generateInfo()}>click</button>
       <Router>
         <div>
-          {linkToken != null ? <Link linkToken={linkToken} /> :
-            <Switch>
-              <Route path="/mainmenu" component={MainMenu} />
-            </Switch>
-          }
+          {linkToken != null ? <Link linkToken={linkToken} /> : <h1></h1>}
         </div>
       </Router >
     </div>
@@ -110,11 +93,17 @@ const Link: React.FC<LinkProps> = (props: LinkProps) => {
     history.push("/mainmenu");
   }
 
+  useEffect(() => {
+    console.log("AAAAAAAAAAAAAA")
+    open();
+  })
+
+  //   <button onClick={() => open()} disabled={!ready}>
+  //   Link account
+  // </button>
   return (
     <div>
-      <button onClick={() => open()} disabled={!ready}>
-        Link account
-      </button>
+      <h1></h1>
       {isOpen ?
         <Switch>
           <Route path="/mainmenu" component={MainMenu} />

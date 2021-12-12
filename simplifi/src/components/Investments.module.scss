@@ -9,19 +9,77 @@ video{
 
 }
 
+.mainDiv{
+    color: red;
+    scroll-behavior: auto !important;
+    height: 200%;
+    &__content {
+        scroll-behavior: smooth !important;
+        height: 100%;
+        overflow-y: scroll;
+        scroll-behavior: smooth;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    
+}
 .Investments{
 
-    overflow: auto;
+    overflow: hidden;
     padding-bottom: 100px;
-
+    scroll-behavior: auto;
+    height: 500px;
     &__intro {
         color: $mainColor;
         position: absolute;
         text-align: center;
-        top: 42%;
-        left: 50%;
+        top: 75%;
+        left: 45%;
+        height: 150%;
         transform: translateX(-50%) translateY(-50%);
         font-size: 45px;
-    }  
 
+        h2{
+            padding-left: 27%;
+            padding-bottom: 3%;
+        }
+    }
+
+    &__titles {
+        font-size: 35px;
+        color: rgb(169, 118, 235);
+        margin-right: 70%;
+    }
+
+    &__linksStyle {
+        font-size: 20px;
+        color: orange !important;
+        margin-right: 65%;
+        text-align: left ;
+
+        table{
+            tbody{
+                tr{
+                    a{
+                        text-align: left;
+                        color:rgb(116, 147, 216) !important;
+                    }
+                }
+            }
+        }
+    }
 }
+    
+
+div.tablediv{
+    overflow: auto;
+    align-items: center;
+    align-self: center;
+    border-collapse: collapse;
+    margin: auto;
+    margin-left: auto;
+    margin-right: auto;
+       
+}
+      

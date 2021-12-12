@@ -1,22 +1,27 @@
-import React from 'react'
-import Header2 from './Header2';
-import classes from './Transactions.module.scss';
+import Header2 from "./Header2";
+import TransactionChart from "./TransactionChart";
+
+import "./Transactions.css";
+import TransactionTable from "./TransactionTable";
 
 function Transactions() {
     return (
-        <transactions>
-            <Header2>
-            </Header2>
-            <video src="/videos/video.mp4" autoPlay mute loop/>
-        <div className={classes.Transactions__intro}>
-            <h1>Transactions</h1>
-            <p>Transactions will go here</p>
-            <a href="/mainmenu">  
-            <button>Back</button>  
-            </a>
+        <div>
+            <Header2></Header2>
+            <video src="/videos/video.mp4" autoPlay mute loop />
+
+            <div className="empty-navbar"></div>
+
+            <div className="transactions-title">
+                <h1>Transactions</h1>
             </div>
-        </transactions>
-    )
+
+            <div className="transactions-data">
+                <TransactionChart />
+                <TransactionTable />
+            </div>
+        </div>
+    );
 }
 
-export default Transactions
+export default Transactions;

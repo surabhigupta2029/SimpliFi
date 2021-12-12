@@ -35,6 +35,10 @@ import datetime
 from datetime import timedelta
 import json
 import os
+import requests
+import re
+from bs4 import BeautifulSoup
+
 load_dotenv()
 
 app = Flask(__name__)
@@ -55,6 +59,48 @@ client = plaid_api.PlaidApi(api_client)
 def get_current_time():
     print("wassup")
     return {'time': time.time()}
+
+
+@app.route('/investmentsTSLA', methods=['GET'])
+def get_charts():
+    url = 'https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=TSLA&apikey=OKI60N00VMW08R6N'
+    r = requests.get(url)
+    data = r.json()
+    page = requests.get(
+        "https://www.google.com/search?q=teslastocknewsarticle")
+    soup = BeautifulSoup(page.content, "html5lib")
+    links = soup.findAll("a")
+    i = 2
+    res = []
+
+    return data
+
+
+@app.route('/getLinks', methods=['GET'])
+def get_links():
+    page = requests.get("https://news.google.com/search?q=teslastock")
+    soup = BeautifulSoup(page.content, "html5lib")
+    links = soup.findAll("a")
+    i = 2
+    res = []
+
+    return jsonify(res)
+
+
+@app.route('/investmentsIBM', methods=['GET'])
+def get_IBM_charts():
+    url = 'https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=IBM&apikey=OKI60N00VMW08R6N'
+    r = requests.get(url)
+    data = r.json()
+    return data
+
+
+@app.route('/investmentsGOOG', methods=['GET'])
+def get_GOOG_charts():
+    url = 'https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=GOOG&apikey=OKI60N00VMW08R6N'
+    r = requests.get(url)
+    data = r.json()
+    return data
 
 
 @app.route('/create_link_token')
@@ -205,10 +251,9 @@ def get_balance():
 @app.route('/transactions', methods=['GET'])
 def get_transactions():
     # Pull transactions for the last 30 days
-    start_date = (datetime.datetime.now() - timedelta(days=60))
-    end_date = datetime.datetime.now() - timedelta(days=30)
+    start_date = (datetime.datetime.now() - timedelta(days=30))
+    end_date = datetime.datetime.now() - timedelta(days=0)
     print(start_date.date(), "   ", end_date.date(), "   ", access_token)
-    time.sleep(5000)
     try:
         options = TransactionsGetRequestOptions()
         request = TransactionsGetRequest(
