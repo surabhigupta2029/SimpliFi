@@ -18,10 +18,30 @@ video{
         color: $mainColor;
         position: absolute;
         text-align: center;
-        top: 42%;
+        top: 49%;
+        
         left: 50%;
         transform: translateX(-50%) translateY(-50%);
         font-size: 45px;
+
+        h1{
+            margin-bottom: 3%;
+            color: rgb(133, 56, 185);
+        }
+        h4{
+            padding-bottom: -2%;
+            color: rgb(221, 176, 221);
+        }
+        h5{
+            font-size: 29px;
+            padding-bottom: 3%;
+        }
+    }
+
+    &__smallText{
+        margin: 0;
+        margin-top: -3%;
+        font-size: 30px;
     }
 
 

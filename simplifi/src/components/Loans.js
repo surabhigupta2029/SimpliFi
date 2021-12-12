@@ -24,7 +24,7 @@ function Loans() {
             <Header2>
             </Header2>
             <video src="/videos/video.mp4" autoPlay mute loop />
-            <Card style={{ width: '20rem', paddingTop: '350px', marginLeft: '150px', left: '80px', color: 'rgb(146, 132, 223)', fontSize: '29px' }}>
+            <Card style={{ width: '20rem', paddingTop: '380px', marginLeft: '210px', left: '80px', color: 'rgb(146, 132, 223)', fontSize: '29px' }}>
                 <Card.Body>
                     <Card.Title style={{ textDecorationLine: 'underline' }}>Student Loan</Card.Title>
                     <Card.Text style={{ fontSize: '18px' }}>
